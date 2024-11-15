@@ -15,7 +15,7 @@ set(CORE_INC_DIR
  CACHE PATH "CORE INCLUDE SOURCE PATH"
 )
 
-add_library(core STATIC ${CORE_SRC} ${CORE_INC} "skydome.cpp")
+add_library(core STATIC ${CORE_SRC} ${CORE_INC} "abrahmFiles/skydome.cpp" "abrahmFiles/skydome.h")
 
 find_package(OpenGL REQUIRED)
 
