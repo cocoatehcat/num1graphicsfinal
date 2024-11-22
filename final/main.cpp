@@ -19,6 +19,7 @@ const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
 
 float vertices[] = {
+	//X		Y		Z		NX		NY		NZ
 	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -88,11 +89,20 @@ int main() {
 
 	// VAO creation for terrain
 	unsigned int TerrVAO;
+	// vvv draw test
+	glGenVertexArrays(1, &TerrVAO);
+	glBindVertexArray(TerrVAO);
 
 	// VBO creation
 	unsigned int VBO;
+	// vvv To test drawing to screen will work
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);	
 
 	// Implement the stride thingies
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 
 	// Read from files (use the read file function in shaders)
 
@@ -135,6 +145,12 @@ int main() {
 		glUniform3f(lightCol, 1.0f, 1.0f, 1.0f); // change these to be functions in the shader class
 
 		glm::mat4 model = glm::mat4(1.0f);
+
+		//need shader files, but draws
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//actual output draw
+		glfwSwapBuffers(window);
 
 	}
 	printf("Shutting down!. . .");
