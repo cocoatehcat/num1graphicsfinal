@@ -17,6 +17,8 @@
 
 //created files
 #include <abrahmFiles/aShader.cpp>
+#include <cocoaShaders/terrShades.h>
+#include <cocoaShaders/camera.h>
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -70,6 +72,17 @@ const char* skyboxVertexSource = "assets/skydomeVert.vert";
 
 const char* skyboxFragmentSource = "assets/skydomeFrag.frag";
 
+teSh::terrShades terr = teSh::terrShades();
+cam::Camera camera = cam::Camera();
+
+void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
+	camera.mouse_callback(window, xposIn, yposIn);
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+	camera.scroll_callback(window, xoffset, yoffset);
+}
+
 int main() {
 	printf("Initializing...");
 	if (!glfwInit()) {
@@ -95,6 +108,15 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	// Inset mouse controls here once camera is implemented
+	glfwMakeContextCurrent(window);
+	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
+
+	// tell GLFW to capture our mouse
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	// Enabled Depth for 3D objects
+	glEnable(GL_DEPTH_TEST);
 
 	// VAO creation for terrain
 	unsigned int TerrVAO;
@@ -139,6 +161,10 @@ int main() {
 	// Maybe include something about time?
 	float prevTime = 0;
 
+	// Cube position
+	glm::vec3 cubePos(1.0f, 1.0f, 1.0f);
+
+
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -149,27 +175,40 @@ int main() {
 		prevTime = time;
 
 		// get input from camera
+		// Getting input
+		camera.processInput(window, deltaTime);
 
 		// Clear framebuffer
 		glClearColor(0.3f, 0.4f, 0.9f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Use shader program
-		
-		//glUseProgram(shaderProgram);
+		// Using the shader!
+		skyboxShader.use();
 
-		// uniforms
-		//int lightCol = glGetUniformLocation(shaderProgram, "lightColor");
-		//glUniform3f(lightCol, 1.0f, 1.0f, 1.0f); // change these to be functions in the shader class
+		// Projection matrix
+		glm::mat4 project = glm::perspective(glm::radians(camera.getFOV()), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
+		skyboxShader.setMat4("proj", project);
 
-		//glm::mat4 model = glm::mat4(1.0f);
+		//View
+		glm::mat4 view = glm::mat4(1.0f);
+		//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f)); // moving scene back to make it seems right to us
+		float radius = 10.0f;
+		float camX = static_cast<float>(sin(glfwGetTime()) * radius);
+		float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
+		view = glm::lookAt(camera.getPos(), camera.getPos() + camera.getFront(), camera.getUp());
+		skyboxShader.setMat4("view", view);
 
-        skyboxShader.use();
+		// Model
+		glm::mat4 model = glm::mat4(1.0f);
+		skyboxShader.setMat4("model", model);
 
 		glBindVertexArray(TerrVAO);
 
 		//need shader files, but draws
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
+		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks
 
 		//actual output draw
 		glfwSwapBuffers(window);
