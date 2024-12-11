@@ -23,10 +23,10 @@ namespace cam {
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 		}
 		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-			cameraPos += glm::normalize(glm::cross(cameraFront, cameraRight)) * cameraSpeed;
+			cameraPos += cameraUp * cameraSpeed;
 		}
 		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-			cameraPos -= glm::normalize(glm::cross(cameraFront, cameraRight)) * cameraSpeed;
+			cameraPos -= cameraUp * cameraSpeed;
 		}
 
 	}
