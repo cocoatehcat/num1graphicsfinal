@@ -17,7 +17,7 @@
 
 //created files
 #include <abrahmFiles/aShader.cpp>
-
+#include <abrahmFiles/skydome.cpp>
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
 
@@ -138,6 +138,9 @@ int main() {
 
 	// Maybe include something about time?
 	float prevTime = 0;
+
+	//skydome
+	//Skydome theDamnSky = Skydome(5, 5, 1.0, glm::vec3(0));
 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
