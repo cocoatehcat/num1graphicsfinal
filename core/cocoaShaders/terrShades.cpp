@@ -15,8 +15,8 @@ namespace teSh {
 
 	// Set stride for VAO and VBO
 	void terrShades::createStride(int index, GLint in2, int length, int voidNum) {
-		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index, in2, GL_FLOAT, GL_FALSE, length * sizeof(float), (void*)(sizeof(float) * voidNum));
+		glEnableVertexAttribArray(index);
 	}
 
 	// This will be to upload files, specifically the vertex and fragment shaders
