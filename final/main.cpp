@@ -22,48 +22,48 @@ const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
 
 float vertices[] = {
-	//X		Y		Z		NX		NY		NZ
-	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	//X		Y		Z	R   G   B   A	NX		NY		NZ
+	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+	 0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
 
-	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f, 
-	 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f, 
-	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f, 
-	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f, 
+	-0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  0.0f, 1.0f,
 
-	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f, 
-	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f, 
-	-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f, 
+	-0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
 
-	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f, 
-	 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f, 
-	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f, 
-	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f, 
-	 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f, 
-	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f, 
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
 
-	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f, 
-	 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f, 
-	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f, 
-	-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f, 
+	-0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
 
-	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f, 
-	 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f, 
-	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 
-	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 
-	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 
-	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+	-0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f
 };
 
 const char* skyboxVertexSource = "assets/skydomeVert.vert";
@@ -109,9 +109,17 @@ int main() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);	
 
-	// Implement the stride thingies
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	// XYZ
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
+    // RGBA
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*3));
+    glEnableVertexAttribArray(1);
+
+    // Normal XYZ
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*7));
+    glEnableVertexAttribArray(2);
 
 	// Read from files (use the read file function in shaders)
 
@@ -148,20 +156,20 @@ int main() {
 
 		// Use shader program
 		
-		glUseProgram(shaderProgram);
-
-		skyboxShader.use();
+		//glUseProgram(shaderProgram);
 
 		// uniforms
-		int lightCol = glGetUniformLocation(shaderProgram, "lightColor");
-		glUniform3f(lightCol, 1.0f, 1.0f, 1.0f); // change these to be functions in the shader class
+		//int lightCol = glGetUniformLocation(shaderProgram, "lightColor");
+		//glUniform3f(lightCol, 1.0f, 1.0f, 1.0f); // change these to be functions in the shader class
 
-		glm::mat4 model = glm::mat4(1.0f);
+		//glm::mat4 model = glm::mat4(1.0f);
+
+        skyboxShader.use();
 
 		glBindVertexArray(TerrVAO);
 
 		//need shader files, but draws
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		//actual output draw
 		glfwSwapBuffers(window);
