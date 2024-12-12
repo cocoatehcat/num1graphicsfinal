@@ -77,7 +77,7 @@ const char* skyboxFragmentSource = "assets/skydomeFrag.frag";
 
 teSh::terrShades terr = teSh::terrShades();
 cam::Camera camera = cam::Camera();
-terrain::terrainClass teCl = terrain::terrainClass();
+terrainClass teCl = terrainClass();
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
 	camera.mouse_callback(window, xposIn, yposIn);
@@ -183,6 +183,8 @@ int main() {
 		// get input from camera
 		// Getting input
 		camera.processInput(window, deltaTime);
+
+		teCl.Render();
 
 		// Clear framebuffer
 		glClearColor(0.3f, 0.4f, 0.9f, 1.0f);
