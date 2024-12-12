@@ -1,3 +1,5 @@
+#pragma once
+
 #include <glm/glm.hpp>
 #include "../external/glad.h"
 #include <vector>
@@ -10,6 +12,7 @@ class Skydome {
 	std::vector<glm::vec3> vertices;
 	std::vector<int> indices;
 	
+public:
 	//constructor
 	Skydome(int numRows, int numCols, float rad, glm::vec3 camPos);
 
