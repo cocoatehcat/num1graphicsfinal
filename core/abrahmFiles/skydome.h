@@ -6,18 +6,23 @@
 
 //abrahm's skydome class :)
 class Skydome {
-	int rows;
-	int columns;
-	float radius;
-	std::vector<float> vertices;
-	std::vector<int> indices;
-	
 public:
+    struct Vertex{
+        glm::vec3 position = glm::vec3(0);
+        glm::vec4 color = glm::vec4(0);
+        glm::vec3 normal = glm::vec3(0);
+        Vertex()= default;
+        Vertex(const glm::vec3 &pos, const glm::vec4 &col, const glm::vec3 norm){
+            position = pos;
+            color = col;
+            normal = norm;
+        }
+    };
 	//constructor
 	Skydome(int numRows, int numCols, float rad, glm::vec3 camPos);
 
 	//use function
-	void Render(unsigned int vao);
+	void Render();
 
 	//wireframe
 	void SetVisibility(bool wireTrue);
@@ -26,4 +31,14 @@ public:
 	void setRows(int numRows);
 	void setCols(int numCols);
 	void setRadius(float rad);
+
+private:
+    int rows;
+    int columns;
+    float radius;
+    unsigned int skyVAO;
+    unsigned int skyVBO;
+    unsigned int skyEBO;
+    std::vector<Vertex> vertices;
+    std::vector<int> indices;
 };

@@ -126,10 +126,6 @@ int main() {
 	glGenVertexArrays(1, &TerrVAO);
 	glBindVertexArray(TerrVAO);
 
-	unsigned int SkyVAO;
-	glGenVertexArrays(1, &SkyVAO);
-	glBindVertexArray(SkyVAO);
-
 	// VBO creation
 	unsigned int VBO;
 	// vvv To test drawing to screen will work
@@ -219,7 +215,7 @@ int main() {
 
 		glDisable(GL_CULL_FACE);
 		glPolygonMode(GL_FRONT, GL_LINE);
-		theDamnSky.Render(TerrVAO);
+		theDamnSky.Render();
 
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks
