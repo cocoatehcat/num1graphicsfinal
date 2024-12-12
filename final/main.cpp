@@ -19,7 +19,10 @@
 #include <abrahmFiles/aShader.cpp>
 #include <cocoaShaders/terrShades.h>
 #include <cocoaShaders/camera.h>
+#include <cocoaShaders/terrain.h>
+
 #include <abrahmFiles/skydome.cpp>
+
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
 
@@ -74,6 +77,7 @@ const char* skyboxFragmentSource = "assets/skydomeFrag.frag";
 
 teSh::terrShades terr = teSh::terrShades();
 cam::Camera camera = cam::Camera();
+terrain::terrainClass teCl = terrain::terrainClass();
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
 	camera.mouse_callback(window, xposIn, yposIn);
@@ -168,6 +172,8 @@ int main() {
 
 	//skydome
 	Skydome theDamnSky = Skydome(5, 5, 1.0, glm::vec3(0));	
+
+	teCl.loadHeightMap("assets/heightmap.save");
 	 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
