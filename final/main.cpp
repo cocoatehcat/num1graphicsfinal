@@ -215,7 +215,7 @@ int main() {
 		glBindVertexArray(TerrVAO);
 
 		//need shader files, but draws
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glDisable(GL_CULL_FACE);
 		glPolygonMode(GL_FRONT, GL_LINE);

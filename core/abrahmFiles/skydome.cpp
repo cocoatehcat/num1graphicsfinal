@@ -46,9 +46,9 @@ void Skydome::Render(unsigned int vao) {
 
 	unsigned int SkyEBO;
 	glGenBuffers(1, &SkyEBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, SkyEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size(), &indices, GL_STATIC_DRAW);
 
 	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-
-
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, &indices);
 }
