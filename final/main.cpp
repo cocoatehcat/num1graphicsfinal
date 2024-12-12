@@ -104,9 +104,6 @@ int main() {
 
 	AShader skyboxShader(skyboxVertexSource, skyboxFragmentSource);
 
-	// Enabled Depth for 3D objects
-	glEnable(GL_DEPTH_TEST);
-
 	// Inset mouse controls here once camera is implemented
 	glfwMakeContextCurrent(window);
 	glfwSetCursorPosCallback(window, mouse_callback);
@@ -115,7 +112,8 @@ int main() {
 	// tell GLFW to capture our mouse
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	// Enabled Depth for 3D objects
+	// Enabled Depth for 3D objects + culling
+	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 
 	// VAO creation for terrain
