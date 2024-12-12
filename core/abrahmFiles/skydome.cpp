@@ -6,7 +6,7 @@ Skydome::Skydome(int numRows, int numCols, float rad, glm::vec3 camPos) {
 	radius = rad;
 }
 
-void Skydome::Render() {
+void Skydome::Render(unsigned int vao) {
 	int subdivisions = columns - 1; //for test purposes - plane
 
 	glm::vec3 v = glm::vec3(0);//vertex
@@ -27,6 +27,9 @@ void Skydome::Render() {
 			indices.push_back(start + columns + 1);
 		}
 	}
+
+	glBindVertexArray(vao);
+	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
 
 }

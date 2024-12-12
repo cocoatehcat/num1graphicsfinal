@@ -163,7 +163,7 @@ int main() {
 	glm::vec3 cubePos(1.0f, 1.0f, 1.0f);	
 
 	//skydome
-	//Skydome theDamnSky = Skydome(5, 5, 1.0, glm::vec3(0));	
+	Skydome theDamnSky = Skydome(5, 5, 1.0, glm::vec3(0));	
 	 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -206,6 +206,10 @@ int main() {
 
 		//need shader files, but draws
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		glDisable(GL_CULL_FACE);
+		glPolygonMode(GL_FRONT, GL_LINE);
+		theDamnSky.Render(TerrVAO);
 
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks

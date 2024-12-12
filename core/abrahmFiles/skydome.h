@@ -17,7 +17,7 @@ public:
 	Skydome(int numRows, int numCols, float rad, glm::vec3 camPos);
 
 	//use function
-	void Render();
+	void Render(unsigned int vao);
 
 	//wireframe
 	void SetVisibility(bool wireTrue);
