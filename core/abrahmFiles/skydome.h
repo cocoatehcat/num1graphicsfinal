@@ -9,7 +9,7 @@ class Skydome {
 	int rows;
 	int columns;
 	float radius;
-	std::vector<glm::vec3> vertices;
+	std::vector<float> vertices;
 	std::vector<int> indices;
 	
 public:

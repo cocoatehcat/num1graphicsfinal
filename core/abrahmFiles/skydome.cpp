@@ -14,7 +14,18 @@ void Skydome::Render(unsigned int vao) {
 		for (int c = 0; c <= subdivisions; c++) {
 			v.x = rows * (c/subdivisions);
 			v.y = -columns * (r / subdivisions);
-			vertices.push_back(v);
+			vertices.push_back(v.x);
+			vertices.push_back(v.y);
+			vertices.push_back(v.z);
+			//color
+			vertices.push_back(0.0);
+			vertices.push_back(1.0);
+			vertices.push_back(1.0);
+			vertices.push_back(1.0);
+			//norm
+			vertices.push_back(1.0);
+			vertices.push_back(1.0);
+			vertices.push_back(1.0);
 		}
 	}
 
@@ -27,6 +38,14 @@ void Skydome::Render(unsigned int vao) {
 			indices.push_back(start + columns + 1);
 		}
 	}
+
+	unsigned int SkyVBO;
+	glGenBuffers(1, &SkyVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, SkyVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+
+	unsigned int SkyEBO;
+	glGenBuffers(1, &SkyEBO);
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());

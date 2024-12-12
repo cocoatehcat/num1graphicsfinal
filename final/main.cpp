@@ -23,50 +23,50 @@
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
 
-float vertices[] = {
-	//X		Y		Z	R   G   B   A	NX		NY		NZ
-	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-	 0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-
-	-0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
-	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  0.0f, 1.0f,
-
-	-0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-	-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-	-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-
-	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-	 0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
-	 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
-
-	-0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
-	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
-
-	-0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-	 0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f,
-	 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-	-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-	-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f
-};
+//float vertices[] = {
+//	//X		Y		Z	R   G   B   A	NX		NY		NZ
+//	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+//	 0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+//	 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+//	 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+//	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+//	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
+//
+//	-0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+//	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+//	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+//	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
+//	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
+//	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  0.0f, 1.0f,
+//
+//	-0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+//	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+//	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+//	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+//	-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+//	-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
+//
+//	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+//	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+//	 0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
+//	 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+//	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
+//	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
+//
+//	-0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+//	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+//	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
+//	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+//	-0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
+//	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
+//
+//	-0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+//	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+//	 0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f,
+//	 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+//	-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
+//	-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f
+//};
 
 const char* skyboxVertexSource = "assets/skydomeVert.vert";
 
@@ -122,24 +122,28 @@ int main() {
 	glGenVertexArrays(1, &TerrVAO);
 	glBindVertexArray(TerrVAO);
 
+	unsigned int SkyVAO;
+	glGenVertexArrays(1, &SkyVAO);
+	glBindVertexArray(SkyVAO);
+
 	// VBO creation
 	unsigned int VBO;
 	// vvv To test drawing to screen will work
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);	
+	//glGenBuffers(1, &VBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);	
 
 	// XYZ
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);
 
     // RGBA
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*3));
-    glEnableVertexAttribArray(1);
+    //glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*3));
+    //glEnableVertexAttribArray(1);
 
     // Normal XYZ
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*7));
-    glEnableVertexAttribArray(2);
+    //glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*7));
+    //glEnableVertexAttribArray(2);
 
 	// Read from files (use the read file function in shaders)
 
