@@ -69,7 +69,7 @@ int main() {
 
 	// Initialization! Wooooo
 
-	AShader skyboxShader(skyboxVertexSource, skyboxFragmentSource);
+	arout::AShader skyboxShader(skyboxVertexSource, skyboxFragmentSource);
 
 	// Inset mouse controls here once camera is implemented
 	glfwMakeContextCurrent(window);
@@ -111,7 +111,7 @@ int main() {
 
 	for (int y = 0; y < terr1.getyChunk(); y++)
 		for (int x = 0; x < terr1.getxChunk(); x++) {
-			terr1.generate_map_chunk(map_chunks[x + y * terr1.getxChunk()], x, y);
+			terr1.generateMapChunk(map_chunks[x + y * terr1.getxChunk()], x, y);
 		}
 
 	int nIndices = terr1.getChunkWidth() * terr1.getChunkHeight() * 6;
