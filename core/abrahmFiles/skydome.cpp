@@ -3,6 +3,7 @@
 #include <iostream>
 
 namespace arout {
+    //instantiates the skydome itself
     Skydome::Skydome(int numSegments, float rad) {
         radius = rad;
         segments = numSegments;
@@ -17,9 +18,20 @@ namespace arout {
 
         //vertices
         vertices.clear();
-        for (int row = 0; row <= numSegments / 2; row++) {
+
+        //top cap
+        for(int i = 0; i <= numSegments; i++){
+            float theta = i * thetaStep;
+            v.x = cos(theta) * rad;
+            v.z = sin(theta) * rad;
+            v.y = 0;
+            vertices.push_back(Vertex(v, glm::vec4(1.0, 0.5, 0.25, 1.0), glm::normalize(v)));
+        }
+
+        //body
+        for (int row = 0; row <= (numSegments + 1) / 2; row++) {
             float phi = row * phiStep;
-            for (int col = 0; col <= numSegments; col++) {
+            for (int col = 0; col <= numSegments + 1; col++) {
                 float theta = col * thetaStep;
                 v.x = rad * cos(theta) * sin(phi);
                 v.y = rad * cos(phi);
@@ -33,17 +45,17 @@ namespace arout {
 
         //indices
         indices.clear();
-        int fuckingColumns = numSegments + 1;
-        for (int row = 1; row < (numSegments - 1) / 2; row++) {
-            for (int col = 0; col < numSegments; col++) {
-                int start = row * fuckingColumns + col;
-                //topR triangle
+        int domeColumns = numSegments + 1;
+        for (int row = 0; row < (numSegments - 1) / 2; row++) {
+            for (int col = 0; col < numSegments + 1; col++) {
+                int start = row * domeColumns + col;
+                //top right triangle
                 indices.push_back(start);
                 indices.push_back(start + 1);
-                indices.push_back(start + fuckingColumns);
-                //botL trangle
-                indices.push_back(start + fuckingColumns + 1);
-                indices.push_back(start + fuckingColumns);
+                indices.push_back(start + domeColumns);
+                //bottom left triangle
+                indices.push_back(start + domeColumns + 1);
+                indices.push_back(start + domeColumns);
                 indices.push_back(start + 1);
             }
         }
@@ -101,9 +113,6 @@ namespace arout {
         glDrawArrays(GL_POINTS, 0, numVertices);
     }
 
-    void Skydome::setRows(int numRows) { rows = numRows; }
-
-    void Skydome::setCols(int numCols) { columns = numCols; }
-
     void Skydome::setRadius(float rad) { radius = rad; }
+    void Skydome::setSegments(int segs) { segments = segs; }
 }

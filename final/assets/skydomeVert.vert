@@ -13,5 +13,5 @@ uniform vec3 camPos;
 
 void main(){
 	Color = aColor;
-	gl_Position = proj * view * model * vec4(aPos.x + camPos.x, aPos.y - camPos.y, aPos.z + camPos.z, 1.0);
+	gl_Position = proj * view * model * vec4(aPos.x + camPos.x, aPos.y - camPos.y*1.25, aPos.z + camPos.z, 1.0);
 }

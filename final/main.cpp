@@ -123,7 +123,7 @@ int main() {
 	glm::vec3 cubePos(1.0f, 1.0f, 1.0f);	
 
 	//skydome
-	arout::Skydome theDamnSky = arout::Skydome(50, 150.0f);
+	arout::Skydome theDamnSky = arout::Skydome(100, 250.0f);
 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {

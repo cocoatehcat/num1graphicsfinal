@@ -30,15 +30,10 @@ namespace arout {
         void Render();
 
         //setters
-        void setRows(int numRows);
-
-        void setCols(int numCols);
-
         void setRadius(float rad);
+        void setSegments(int segs);
 
     private:
-        int rows;
-        int columns;
         float radius;
         unsigned int skyVAO;
         unsigned int skyVBO;
