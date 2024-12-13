@@ -123,7 +123,7 @@ int main() {
 	glm::vec3 cubePos(1.0f, 1.0f, 1.0f);	
 
 	//skydome
-	arout::Skydome theDamnSky = arout::Skydome(50, 105.0f, glm::vec3(0));
+	arout::Skydome theDamnSky = arout::Skydome(50, 150.0f);
 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -175,6 +175,8 @@ int main() {
 		glm::mat4 model = glm::mat4(1.0f);
 		skyboxShader.setMat4("model", model);
 
+        //giving camera to the skydome
+        skyboxShader.setVec3("camPos",camera.cameraPos);
 
 		//need shader files, but draws
 		//glDrawArrays(GL_TRIANGLES, 0, 3);

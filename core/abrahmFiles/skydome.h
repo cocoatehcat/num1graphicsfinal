@@ -24,7 +24,7 @@ namespace arout {
         };
 
         //constructor
-        Skydome(int numSegments, float rad, glm::vec3 camPos);
+        Skydome(int numSegments, float rad);
 
         //use function
         void Render();

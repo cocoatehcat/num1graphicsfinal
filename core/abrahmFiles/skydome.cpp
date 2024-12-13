@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace arout {
-    Skydome::Skydome(int numSegments, float rad, glm::vec3 camPos) {
+    Skydome::Skydome(int numSegments, float rad) {
         radius = rad;
         segments = numSegments;
 
@@ -12,7 +12,7 @@ namespace arout {
 
         glm::vec3 apexPoint(0.0f, radius, 0.0f);
 
-        float thetaStep = 2 * ew::PI / numSegments;
+        float thetaStep = 2 * ew::PI / float(numSegments);
         float phiStep = ew::PI / float(numSegments);
 
         //vertices
@@ -89,7 +89,13 @@ namespace arout {
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
-        //
+        //for(auto v:vertices){
+        //    v.position.x += camPos.x;
+        //    v.position.y += camPos.y;
+        //    v.position.z += camPos.z;
+        //}
+
+        //index draw
         glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, nullptr);
         //vertex draw
         glDrawArrays(GL_POINTS, 0, numVertices);
