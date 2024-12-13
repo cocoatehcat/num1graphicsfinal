@@ -8,7 +8,7 @@
 class terrainClass;
 
 class triList {
-public: 
+public:
 	void createTriList(int widthIn, int depthIn, const terrainClass* terrain);
 
 	void Render();

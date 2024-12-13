@@ -26,56 +26,10 @@
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
 
-//float vertices[] = {
-//	//X		Y		Z	R   G   B   A	NX		NY		NZ
-//	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-//	 0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-//	 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-//	 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-//	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-//	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, -1.0f,
-//
-//	-0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-//	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-//	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-//	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
-//	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  0.0f, 1.0f,
-//	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  0.0f, 1.0f,
-//
-//	-0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-//	-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-//	-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-//	-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-//	-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-//	-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,-1.0f,  0.0f,  0.0f,
-//
-//	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-//	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-//	 0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
-//	 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-//	 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,1.0f,  0.0f,  0.0f,
-//	 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,1.0f,  0.0f,  0.0f,
-//
-//	-0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-//	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-//	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
-//	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-//	-0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f, -1.0f,  0.0f,
-//	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f, -1.0f,  0.0f,
-//
-//	-0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-//	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-//	 0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f,
-//	 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-//	-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,0.0f,  1.0f,  0.0f,
-//	-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,0.0f,  1.0f,  0.0f
-//};
-
 const char* skyboxVertexSource = "assets/skydomeVert.vert";
 
 const char* skyboxFragmentSource = "assets/skydomeFrag.frag";
 
-teSh::terrShades terr = teSh::terrShades();
 cam::Camera camera = cam::Camera();
 terrainClass teCl = terrainClass();
 
@@ -120,46 +74,6 @@ int main() {
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 
-	// VAO creation for terrain
-	unsigned int TerrVAO;
-	// vvv draw test
-	glGenVertexArrays(1, &TerrVAO);
-	glBindVertexArray(TerrVAO);
-
-	// VBO creation
-	unsigned int VBO;
-	// vvv To test drawing to screen will work
-	//glGenBuffers(1, &VBO);
-	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);	
-
-	// XYZ
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-	//glEnableVertexAttribArray(0);
-
-    // RGBA
-    //glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*3));
-    //glEnableVertexAttribArray(1);
-
-    // Normal XYZ
-    //glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*7));
-    //glEnableVertexAttribArray(2);
-
-	// Read from files (use the read file function in shaders)
-
-	// Vertex Shader
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-	// Fragment Shader
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// Create a program
-	unsigned int shaderProgram = glCreateProgram();
-
-	// Once shaders are done with, delete
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-
 	// Maybe include something about time?
 	float prevTime = 0;
 
@@ -169,7 +83,7 @@ int main() {
 	//skydome
 	Skydome theDamnSky = Skydome(5, 5, 1.0, glm::vec3(0));	
 
-	teCl.loadHeightMap("assets/heightmap.save");
+	teCl.loadHeightMapFile("assets/heightmap.save");
 	 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -184,11 +98,12 @@ int main() {
 		// Getting input
 		camera.processInput(window, deltaTime);
 
-		teCl.Render();
-
 		// Clear framebuffer
 		glClearColor(0.3f, 0.4f, 0.9f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Draw the mesh
+		teCl.Render();
 
 		// Using the shader!
 		skyboxShader.use();
@@ -210,7 +125,6 @@ int main() {
 		glm::mat4 model = glm::mat4(1.0f);
 		skyboxShader.setMat4("model", model);
 
-		glBindVertexArray(TerrVAO);
 
 		//need shader files, but draws
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -221,6 +135,7 @@ int main() {
 
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks
+
 
 		//actual output draw
 		glfwSwapBuffers(window);

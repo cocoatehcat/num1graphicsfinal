@@ -11,9 +11,9 @@ public:
 	char* readFile(const char* fileName, int& size);
 	void initTerrain();
 	void Render();
+	void loadHeightMapFile(const char* fileName);
 
 protected:
-	void loadHeightMapFile(const char* fileName);
 	Array2D<float> heightMap; //Floating points allow for smoother terrain
 	int terrainSize = 0;
 

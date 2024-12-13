@@ -14,14 +14,24 @@ void terrainClass::loadHeightMap(const char* fileName) {
 	int fileSize = 0;
 	unsigned char* p = (unsigned char*)readFile(fileName, fileSize);
 
-	assert(fileSize % sizeof(float) == 0);
+	if (fileSize % sizeof(float) != 0) {
+		printf("%s:%d - '%s' does not contain an whole number of floats (size %d)\n", __FILE__, __LINE__, fileName, fileSize);
+		exit(0);
+	}
 
 	terrainSize = sqrtf(fileSize / sizeof(float));
+
+	printf("Terrain size %d\n", terrainSize);
+
+	if ((terrainSize * terrainSize) != (fileSize / sizeof(float))) {
+		printf("%s:%d - '%s' does not contain a square height map - size %d\n", __FILE__, __LINE__, fileName, fileSize);
+		exit(0);
+	}
 
 	// Uses terrainSize for height and width
 	heightMap.InitArray2D(terrainSize, terrainSize, p);
 
-	heightMap.PrintFloat();
+	//heightMap.PrintFloat();
 }
 
 // Reading simple file
@@ -79,5 +89,7 @@ void terrainClass::loadHeightMapFile(const char* fileName) {
 }
 
 void terrainClass::Render() {
+	initTerrain();
+	terrSh.use();
 	triListOb.Render();
 }
