@@ -1,3 +1,5 @@
+// Created by Arija
+
 #include "../external/glad.h"
 #include <cmath>
 #include <vector>

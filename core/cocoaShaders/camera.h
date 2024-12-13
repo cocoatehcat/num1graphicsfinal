@@ -1,3 +1,6 @@
+// Created by Arija
+// Was made in class
+
 #pragma once
 
 #include "../external/glad.h"
@@ -20,7 +23,7 @@ namespace cam {
 		glm::vec3 getFront() { return cameraFront; }
 		glm::vec3 getUp() { return cameraUp; }
 		float getFOV() { return fov; }
-		glm::vec3 cameraPos = glm::vec3(0.0f, 10.0f, 3.0f);
+		glm::vec3 cameraPos = glm::vec3(0.0f, 20.0f, 3.0f);
 
 	private:
 

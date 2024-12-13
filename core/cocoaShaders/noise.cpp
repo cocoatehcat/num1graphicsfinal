@@ -1,5 +1,8 @@
+// Created by Arija
+
 #include "noise.h"
 
+// This function was looked up
 double Noise::grad(int hash, double x, double y, double z) {
    int h = hash & 15;                      // CONVERT LO 4 BITS OF HASH CODE
    double u = h<8 ? x : y,                 // INTO 12 GRADIENT DIRECTIONS.
@@ -7,6 +10,7 @@ double Noise::grad(int hash, double x, double y, double z) {
    return ((h&1) == 0 ? u : -u) + ((h&2) == 0 ? v : -v);
 }
 
+// Generates random noise to be used
 double Noise::perlin_noise(float x, float y, std::vector<int> &p) {
     int z = 0.5;
 
@@ -32,6 +36,7 @@ double Noise::perlin_noise(float x, float y, std::vector<int> &p) {
                                    grad(p[BB+1], x-1, y-1, z-1 ))));
 }
 
+// Permutation
 std::vector<int> Noise::get_permutation_vector() {
     std::vector<int> p;
 
