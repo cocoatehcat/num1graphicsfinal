@@ -4,6 +4,7 @@
 #include "../external/glad.h"
 #include <vector>
 
+
 //abrahm's skydome class :)
 class Skydome {
 public:
@@ -19,7 +20,8 @@ public:
         }
     };
 	//constructor
-	Skydome(int numRows, int numCols, float rad, glm::vec3 camPos);
+	//Skydome(int numRows, int numCols, float rad, glm::vec3 camPos);
+    Skydome(int numSegments, float rad, glm::vec3 camPos);
 
 	//use function
 	void Render();
@@ -36,6 +38,8 @@ private:
     unsigned int skyVAO;
     unsigned int skyVBO;
     unsigned int skyEBO;
+    int verticesTop;
+    int verticesRegular;
     int numVertices;
     std::vector<Vertex> vertices;
     int numIndices;
