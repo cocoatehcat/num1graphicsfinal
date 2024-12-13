@@ -123,7 +123,7 @@ int main() {
 	glm::vec3 cubePos(1.0f, 1.0f, 1.0f);	
 
 	//skydome
-	Skydome theDamnSky = Skydome(5, 5, 1.0, glm::vec3(0));
+	Skydome theDamnSky = Skydome(10, 6.0f, glm::vec3(0));
 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -179,8 +179,9 @@ int main() {
 		//need shader files, but draws
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		glDisable(GL_CULL_FACE);
-		glPolygonMode(GL_FRONT, GL_FILL);
+		//glDisable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		theDamnSky.Skydome::Render();
 
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
