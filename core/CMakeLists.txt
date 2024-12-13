@@ -16,7 +16,7 @@ set(CORE_INC_DIR
 )
 
 add_library(core STATIC ${CORE_SRC} ${CORE_INC} "abrahmFiles/skydome.cpp" "abrahmFiles/skydome.h" "abrahmFiles/aShader.h" "abrahmFiles/aShader.cpp"
-        cocoaShaders/triList.cpp)
+        "cocoaShaders/triList.cpp" "cocoaShaders/triList.h")
 
 find_package(OpenGL REQUIRED)
 

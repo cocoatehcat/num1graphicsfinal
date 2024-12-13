@@ -4,7 +4,6 @@
 #include "triList.h"
 #include "terrShades.h"
 
-class triList;
 
 class terrainClass {
 public:
