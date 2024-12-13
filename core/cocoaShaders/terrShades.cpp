@@ -1,6 +1,11 @@
 #include "terrShades.h"
 
 namespace teSh {
+	// Use program
+	void terrShades::use() {
+		glUseProgram(ID);
+	}
+
 	// Create VAO
 	void terrShades::createVAO(int num, unsigned int* va) {
 		glGenVertexArrays(num, va);
@@ -72,25 +77,114 @@ namespace teSh {
 	}
 
 	// creates shader program
-	void terrShades::createProgram(unsigned int prog, unsigned int vert, unsigned int frag, int wee, char log[]) {
-		glAttachShader(prog, vert);
-		glAttachShader(prog, frag);
-		glLinkProgram(prog);
-		glUseProgram(prog);
+	void terrShades::createProgram(unsigned int vert, unsigned int frag, int wee, char log[]) {
+		glAttachShader(ID, vert);
+		glAttachShader(ID, frag);
+		glLinkProgram(ID);
+		glUseProgram(ID);
 
-		checkProCompile(prog, wee, log);
+		checkProCompile(wee, log);
 	}
 
 	// checks to see if shader program compiles
-	void terrShades::checkProCompile(unsigned int prog, int wee, char log[]) {
-		glGetProgramiv(prog, GL_LINK_STATUS, &wee);
+	void terrShades::checkProCompile(int wee, char log[]) {
+		glGetProgramiv(ID, GL_LINK_STATUS, &wee);
 
 		if (!wee) {
-			glGetProgramInfoLog(prog, 512, NULL, log);
+			glGetProgramInfoLog(ID, 512, NULL, log);
 			printf("ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s", log);
 		}
 	}
 
+	void terrShades::genShader() {
+		std::string vertexShaderSo;
+		std::string fragmentShaderSo;
+		std::tie(vertexShaderSo, fragmentShaderSo) = readFile("assets/terrain.vert", "assets/terrain.frag");
+
+		const char* vertexShaderSource = vertexShaderSo.c_str();
+		const char* fragmentShaderSource = fragmentShaderSo.c_str();
+
+		// Check if Shader Compiles
+		int  success = 0;
+		char infoLog[512];
+
+		// Vertex Shader
+		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+		assignShader(vertexShader, 1, vertexShaderSource, success, infoLog);
+
+		// Fragment shader
+		unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+		assignShader(fragmentShader, 1, fragmentShaderSource, success, infoLog);
+
+		// Creating a program
+		ID = glCreateProgram();
+		createProgram(vertexShader, fragmentShader, success, infoLog);
+	}
+
+	/*std::string vertexShaderSo;
+std::string fragmentShaderSo;
+std::tie(vertexShaderSo, fragmentShaderSo) = shad.readFile("assets/vertexShader.vert", "assets/fragmentShader.frag");
+
+	const char* vertexShaderSource = vertexShaderSo.c_str();
+	const char* fragmentShaderSource = fragmentShaderSo.c_str();
+
+	// Check if Shader Compiles
+	int  success = 0;
+	char infoLog[512];
+
+	// Vertex Shader
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	shad.assignShader(vertexShader, 1, vertexShaderSource, success, infoLog);
+
+	// Fragment shader
+	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	shad.assignShader(fragmentShader, 1, fragmentShaderSource, success, infoLog);
+
+	// Creating a program
+	unsigned int shaderProgram = glCreateProgram();
+	shad.createProgram(shaderProgram, vertexShader, fragmentShader, success, infoLog); */
+	/*
+	* // VAO creation for terrain
+	unsigned int TerrVAO;
+	// vvv draw test
+	glGenVertexArrays(1, &TerrVAO);
+	glBindVertexArray(TerrVAO);
+
+	// VBO creation
+	unsigned int VBO;
+	// vvv To test drawing to screen will work
+	//glGenBuffers(1, &VBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	// XYZ
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);
+
+	// RGBA
+	//glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*3));
+	//glEnableVertexAttribArray(1);
+
+	// Normal XYZ
+	//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float)*7));
+	//glEnableVertexAttribArray(2);
+
+	// Read from files (use the read file function in shaders)
+
+	// Vertex Shader
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+	// Fragment Shader
+	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+	// Create a program
+	unsigned int shaderProgram = glCreateProgram();
+
+	// Once shaders are done with, delete
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+	 *
+	 */
 	// TO ADD
 	// those funkky little uniform expressions to be more automated
 	// looks back at the file and see what was used a lot

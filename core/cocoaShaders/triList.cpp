@@ -8,7 +8,7 @@
 
 void triList::createTriList(int widthIn, int depthIn, const terrainClass* terrain) {
 	width = widthIn;
-	depth = dpethIn;
+	depth = depthIn;
 
 	createGLState();
 
@@ -44,8 +44,8 @@ void triList::populateBuffers(const terrainClass* terrain) {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
 }
 
-void triList::Vertex::initVertices(const terrainClass* terrain, int x, int z) {
-	pos = Vector3f(x, 0.0f, z);
+void triList::Vertex::initVertex(const terrainClass* terrain, int x, int z) {
+	std::vector<float> pos = {(float)x, 0.0f, (float)z};
 
 }
 
@@ -63,6 +63,6 @@ void triList::initVertices(const terrainClass* terrain, std::vector<Vertex>& Ver
 
 void triList::Render() {
 	glBindVertexArray(vao);
-	glDrawArrays(GL_POINTS, 0, depth, width);
+	glDrawArrays(GL_POINTS, 0, depth * width);
 	glBindVertexArray(0);
 }

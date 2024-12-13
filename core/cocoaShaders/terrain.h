@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../external/array_2d.h"
+#include "../external/outside/array_2d.h"
 #include "triList.h"
-#include "terrTechnique.h"
+#include "terrShades.h"
 
-
+class triList;
 
 class terrainClass {
 public:
@@ -14,10 +14,10 @@ public:
 	void Render();
 
 protected:
-	void loadHieghtMapFile(const char* fileName);
+	void loadHeightMapFile(const char* fileName);
 	Array2D<float> heightMap; //Floating points allow for smoother terrain
 	int terrainSize = 0;
 
 	triList triListOb;
-	TerrainTechnique terrTech;
+	teSh::terrShades terrSh;
 };

@@ -1,11 +1,9 @@
 #pragma once
 
-#include "../external/glew.h"
 #include <vector>
 #include <cmath>
 #include <stdio.h>
-
-#include "../external/ogldev_math_3d.h"
+#include "../external/glad.h"
 
 class terrainClass;
 
@@ -25,7 +23,7 @@ private:
 	GLuint ib;
 
 	struct Vertex {
-		Vector3f pos;
+		std::vector<float> pos;
 
 		void initVertex(const terrainClass* terrain, int x, int z);
 	};

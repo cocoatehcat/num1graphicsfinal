@@ -69,10 +69,10 @@ char* terrainClass::readFile(const char* fileName, int& size) {
 }
 
 void terrainClass::initTerrain() {
-	terrTech.Init();
+	terrSh.genShader();
 }
 
-void terrainClass::loadHieghtMapFile(const char* fileName) {
+void terrainClass::loadHeightMapFile(const char* fileName) {
 	loadHeightMap(fileName);
 
 	triListOb.createTriList(terrainSize, terrainSize, this);
