@@ -1,3 +1,7 @@
+// Created by Arija
+// Uses Abrahm's constructor implementation
+// Since it worked and was easier than redesigning something
+
 #pragma once
 
 #include "../external/glad.h"
@@ -18,6 +22,8 @@ namespace teSh {
 		void setVec3(const std::string &name, const glm::vec3 &value) const;
 		void setVec3(const std::string &name, float x, float y, float z) const;
 		void setMat4(const std::string &name, const glm::mat4 &mat) const;
+
+		// Functions from my original implementation
 		void createVAO(int num, unsigned int* va);
 		void createVBO(int num, unsigned int* vb);
 		void createStride(int index, GLint in2, int length, int voidNum);

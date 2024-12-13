@@ -1,3 +1,5 @@
+// Arija's shader
+
 #version 330 core
 flat in vec3 flatColor;
 in vec3 Color;

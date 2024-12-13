@@ -1,3 +1,5 @@
+// Created by Arija
+
 #include "terrShades.h"
 
 namespace teSh {

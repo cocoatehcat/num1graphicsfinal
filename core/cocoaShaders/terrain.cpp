@@ -1,8 +1,13 @@
+// Created by Arija!
+
 #include "terrain.h"
 
 Noise no = Noise();
 cam::Camera came = cam::Camera();
 
+
+// Renders the new terrain everyframe
+// Only renders in a distance close to camera to reduce lag
 void terrainClass::render(std::vector<GLuint>& map_chunks, teSh::terrShades& shader, glm::mat4& view, glm::mat4& model, glm::mat4& projection, int& nIndices) {
     glClearColor(0.53, 0.81, 0.92, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -15,7 +20,7 @@ void terrainClass::render(std::vector<GLuint>& map_chunks, teSh::terrShades& sha
     for (int y = 0; y < yMapChunks; y++)
         for (int x = 0; x < xMapChunks; x++) {
             // Only render chunk if it's within render distance
-            if (std::abs(gridPosX - x) <= chunk_render_distance && (y - gridPosY) <= chunk_render_distance) {
+            if (std::abs(gridPosX - x) <= chunkRenderDistance && (y - gridPosY) <= chunkRenderDistance) {
                 model = glm::mat4(1.0f);
                 model = glm::translate(model, glm::vec3(-chunkWidth / 2.0 + (chunkWidth - 1) * x, 0.0, -chunkHeight / 2.0 + (chunkHeight - 1) * y));
                 shader.setMat4("u_model", model);
@@ -28,7 +33,9 @@ void terrainClass::render(std::vector<GLuint>& map_chunks, teSh::terrShades& sha
         }
 }
 
-void terrainClass::generate_map_chunk(GLuint& VAO, int xOffset, int yOffset) {
+// Generates a chunk
+// Performs the OpenGL for it
+void terrainClass::generateMapChunk(GLuint& VAO, int xOffset, int yOffset) {
     std::vector<int> indices;
     std::vector<float> noise_map;
     std::vector<float> vertices;
@@ -36,11 +43,11 @@ void terrainClass::generate_map_chunk(GLuint& VAO, int xOffset, int yOffset) {
     std::vector<float> colors;
 
     // Generate map
-    indices = generate_indices();
-    noise_map = generate_noise_map(xOffset, yOffset);
-    vertices = generate_vertices(noise_map);
-    normals = generate_normals(indices, vertices);
-    colors = generate_biome(vertices, xOffset, yOffset);
+    indices = generateIndices();
+    noise_map = generateNoiseMap(xOffset, yOffset);
+    vertices = generateVertices(noise_map);
+    normals = generateNormals(indices, vertices);
+    colors = generateBiome(vertices, xOffset, yOffset);
 
     GLuint VBO[3], EBO;
 
@@ -79,11 +86,13 @@ void terrainClass::generate_map_chunk(GLuint& VAO, int xOffset, int yOffset) {
     glEnableVertexAttribArray(2);
 }
 
-glm::vec3 terrainClass::get_color(int r, int g, int b) {
+// Gets color for the terrain
+glm::vec3 terrainClass::getColor(int r, int g, int b) {
     return glm::vec3(r / 255.0, g / 255.0, b / 255.0);
 }
 
-std::vector<float> terrainClass::generate_noise_map(int offsetX, int offsetY) {
+// Makes the noise map the terrain is based off
+std::vector<float> terrainClass::generateNoiseMap(int offsetX, int offsetY) {
     std::vector<float> noiseValues;
     std::vector<float> normalizedNoiseValues;
     std::vector<int> p = no.get_permutation_vector();
@@ -129,22 +138,21 @@ std::vector<float> terrainClass::generate_noise_map(int offsetX, int offsetY) {
     return normalizedNoiseValues;
 }
 
-
-
-std::vector<float> terrainClass::generate_biome(const std::vector<float>& vertices, int xOffset, int yOffset) {
+// Makes different colors for the chunks
+std::vector<float> terrainClass::generateBiome(const std::vector<float>& vertices, int xOffset, int yOffset) {
     std::vector<float> colors;
     std::vector<terrainColor> biomeColors;
-    glm::vec3 color = get_color(255, 255, 255);
+    glm::vec3 color = getColor(255, 255, 255);
 
     // NOTE: Terrain color height is a value between 0 and 1
-    biomeColors.push_back(terrainColor(WATER_HEIGHT * 0.5, get_color(60, 95, 190)));   // Deep water
-    biomeColors.push_back(terrainColor(WATER_HEIGHT, get_color(60, 100, 190)));  // Shallow water
-    biomeColors.push_back(terrainColor(0.15, get_color(210, 215, 130)));                // Sand
-    biomeColors.push_back(terrainColor(0.30, get_color(95, 165, 30)));                // Grass 1
-    biomeColors.push_back(terrainColor(0.40, get_color(65, 115, 20)));                // Grass 2
-    biomeColors.push_back(terrainColor(0.50, get_color(90, 65, 60)));                // Rock 1
-    biomeColors.push_back(terrainColor(0.80, get_color(75, 60, 55)));                // Rock 2
-    biomeColors.push_back(terrainColor(1.00, get_color(255, 255, 255)));                // Snow
+    biomeColors.push_back(terrainColor(WATER_HEIGHT * 0.5, getColor(60, 95, 190)));     // Deep water
+    biomeColors.push_back(terrainColor(WATER_HEIGHT, getColor(60, 100, 190)));          // Shallow water
+    biomeColors.push_back(terrainColor(0.15, getColor(210, 215, 130)));           // Sand
+    biomeColors.push_back(terrainColor(0.30, getColor(95, 165, 30)));             // Grass 1
+    biomeColors.push_back(terrainColor(0.40, getColor(65, 115, 20)));             // Grass 2
+    biomeColors.push_back(terrainColor(0.50, getColor(90, 65, 60)));              // Rock 1
+    biomeColors.push_back(terrainColor(0.80, getColor(75, 60, 55)));              // Rock 2
+    biomeColors.push_back(terrainColor(1.00, getColor(255, 255, 255)));           // Snow
 
 
     // Determine which color to assign each vertex by its y-coord
@@ -164,7 +172,8 @@ std::vector<float> terrainClass::generate_biome(const std::vector<float>& vertic
     return colors;
 }
 
-std::vector<float> terrainClass::generate_normals(const std::vector<int>& indices, const std::vector<float>& vertices) {
+// Gets the normals for the lighting
+std::vector<float> terrainClass::generateNormals(const std::vector<int>& indices, const std::vector<float>& vertices) {
     int pos;
     glm::vec3 normal;
     std::vector<float> normals;
@@ -194,7 +203,8 @@ std::vector<float> terrainClass::generate_normals(const std::vector<int>& indice
     return normals;
 }
 
-std::vector<float> terrainClass::generate_vertices(const std::vector<float>& noise_map) {
+// Creates the vertices to be used for the mesh
+std::vector<float> terrainClass::generateVertices(const std::vector<float>& noise_map) {
     std::vector<float> v;
 
     for (int y = 0; y < chunkHeight + 1; y++)
@@ -211,7 +221,8 @@ std::vector<float> terrainClass::generate_vertices(const std::vector<float>& noi
     return v;
 }
 
-std::vector<int> terrainClass::generate_indices() {
+// Makes Indices to be more efficient
+std::vector<int> terrainClass::generateIndices() {
     std::vector<int> indices;
 
     for (int y = 0; y < chunkHeight; y++)

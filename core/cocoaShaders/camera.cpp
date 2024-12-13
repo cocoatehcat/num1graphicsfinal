@@ -1,3 +1,5 @@
+// Created by Arija
+
 #include "camera.h"
 
 namespace cam {

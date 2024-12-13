@@ -1,3 +1,5 @@
+// Arija's old shader (from class)
+
 #version 330 core
 out vec4 FragColor;
 
