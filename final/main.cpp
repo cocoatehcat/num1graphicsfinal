@@ -200,10 +200,10 @@ int main() {
         }
 		theDamnSky.Skydome::Render();
 
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
-		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks
+		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks
 
-        //imgui panel
+        //imgui panel - abrahm
         //start
         ImGui_ImplGlfw_NewFrame();
         ImGui_ImplOpenGL3_NewFrame();
@@ -225,106 +225,3 @@ int main() {
 	}
 	printf("Shutting down!. . .");
 }
-
-/* // IMGUI
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
-
-const GLint WIDTH = 1920, HEIGHT = 1080;
-const int SCREEN_WIDTH = 1080;
-const int SCREEN_HEIGHT = 720;
-
-cam::Camera camera = cam::Camera();
-terrainClass terr = terrainClass();
-
-void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
-    camera.mouse_callback(window, xposIn, yposIn);
-}
-
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-    camera.scroll_callback(window, xoffset, yoffset);
-}
-
-// FPS
-double lastTime = glfwGetTime();
-int nbFrames = 0;
-
-// Timing
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
-float currentFrame;
-
-int main() {
-    printf("Initializing...");
-    if (!glfwInit()) {
-        printf("GLFW failed to init!");
-        return 1;
-    }
-    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Lighting", NULL, NULL);
-    if (window == NULL) {
-        printf("GLFW failed to create window");
-        return 1;
-    }
-    glfwMakeContextCurrent(window);
-    if (!gladLoadGL(glfwGetProcAddress)) {
-        printf("GLAD Failed to load GL headers");
-        return 1;
-    }
-
-    //Initialize ImGUI
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init();
-
-    // Enable z-buffer
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_FRAMEBUFFER_SRGB);
-
-    // Enable mouse input
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-    // Initalize variables
-    glm::mat4 view;
-    glm::mat4 model;
-    glm::mat4 projection;
-
-    Shader objectShader("objectShader.vert", "objectShader.frag");
-
-    // Default to coloring to flat mode
-    objectShader.use();
-    objectShader.setBool("isFlat", true);
-
-    // Lighting intensities and direction
-    objectShader.setVec3("light.ambient", 0.2, 0.2, 0.2);
-    objectShader.setVec3("light.diffuse", 0.3, 0.3, 0.3);
-    objectShader.setVec3("light.specular", 1.0, 1.0, 1.0);
-    objectShader.setVec3("light.direction", -0.2f, -1.0f, -0.3f);
-
-    std::vector<GLuint> map_chunks(terr.getxChunk() * terr.getyChunk());
-
-    for (int y = 0; y < terr.getyChunk(); y++)
-        for (int x = 0; x < terr.getxChunk(); x++) {
-            terr.generate_map_chunk(map_chunks[x + y * terr.getxChunk()], x, y);
-        }
-
-    int nIndices = terr.getChunkWidth() * terr.getChunkHeight() * 6;
-
-    while (!glfwWindowShouldClose(window)) {
-        objectShader.use();
-        projection = glm::perspective(glm::radians(camera.getFOV()), (float)WIDTH / (float)HEIGHT, 0.1f, (float)terr.getChunkWidth() * (terr.getchunkRenDis() - 1.2f));
-        float radius = 10.0f;
-        float camX = static_cast<float>(sin(glfwGetTime()) * radius);
-        float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
-        view = glm::lookAt(camera.getPos(), camera.getPos() + camera.getFront(), camera.getUp());
-        objectShader.setMat4("u_projection", projection);
-        objectShader.setMat4("u_view", view);
-        objectShader.setVec3("u_viewPos", camera.cameraPos);
-
-        terr.render(map_chunks, objectShader, view, model, projection, nIndices);
-    }
-
-    for (int i = 0; i < map_chunks.size(); i++) {
-        glDeleteVertexArrays(1, &map_chunks[i]);
-    }*/

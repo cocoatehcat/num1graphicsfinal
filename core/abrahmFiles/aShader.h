@@ -7,7 +7,7 @@
 #include <sstream>
 #include <iostream>
 
-namespace arout {
+namespace arout { //abrahm shader
     class AShader {
         //program ID
         unsigned int id;

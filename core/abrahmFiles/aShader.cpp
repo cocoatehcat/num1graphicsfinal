@@ -1,7 +1,7 @@
 #include "aShader.h"
 
 unsigned int id;
-namespace arout {
+namespace arout { //abrahm shader
     AShader::AShader(const char *vertexPath, const char *fragmentPath) {
         std::string vertexCode;
         std::string fragmentCode;

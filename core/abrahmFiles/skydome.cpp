@@ -2,7 +2,7 @@
 #include "../external/ewMath.h"
 #include <iostream>
 
-namespace arout {
+namespace arout { //abrahm's skydome implementation
     //instantiates the skydome itself
     Skydome::Skydome(int numSegments, float rad) {
         radius = rad;

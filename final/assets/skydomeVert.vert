@@ -1,4 +1,5 @@
 #version 330 core
+//abrahm code
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec4 aColor;
 layout (location = 2) in vec3 aNormPos;
