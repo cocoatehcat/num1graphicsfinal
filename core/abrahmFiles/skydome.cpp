@@ -1,4 +1,5 @@
 #include "skydome.h"
+#include <iostream>
 
 Skydome::Skydome(int numRows, int numCols, float rad, glm::vec3 camPos) {
 	rows = numRows;
@@ -71,7 +72,7 @@ void Skydome::Render() {
 
     int numIndices = indices.size();
 
-    glBindVertexArray(0);
+    glBindVertexArray(skyVAO);
     glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, nullptr);
 
 

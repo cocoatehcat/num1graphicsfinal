@@ -214,7 +214,7 @@ int main() {
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glDisable(GL_CULL_FACE);
-		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_FRONT, GL_FILL);
 		theDamnSky.Render();
 
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
