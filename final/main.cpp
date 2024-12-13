@@ -10,6 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
 // IMGUI
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -69,6 +70,13 @@ int main() {
 
 	// Initialization! Wooooo
 
+    //imgui initialization
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init();
+
+    //shaders for the skybox
 	arout::AShader skyboxShader(skyboxVertexSource, skyboxFragmentSource);
 
 	// Inset mouse controls here once camera is implemented
@@ -125,6 +133,10 @@ int main() {
 	//skydome
 	arout::Skydome theDamnSky = arout::Skydome(100, 250.0f);
 
+    //imgui variables
+    bool wireframeMode = false;
+    glm::vec3 domeColor = glm::vec3(0.0, 0.0, 0.5);
+
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -175,21 +187,38 @@ int main() {
 		glm::mat4 model = glm::mat4(1.0f);
 		skyboxShader.setMat4("model", model);
 
-        //giving camera to the skydome
+        //skydome uniforms
         skyboxShader.setVec3("camPos",camera.cameraPos);
+        skyboxShader.setVec3("domeColor", domeColor);
 
-		//need shader files, but draws
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		//glDisable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        if(wireframeMode == true){
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }
+		else{
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
 		theDamnSky.Skydome::Render();
 
-		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks
 
+        //imgui panel
+        //start
+        ImGui_ImplGlfw_NewFrame();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui::NewFrame();
 
+        //window
+        ImGui::Begin("Options");
+        ImGui::Checkbox("Wireframe", &wireframeMode);
+        ImGui::ColorEdit3("Dome Color: R", &domeColor.r);
+        ImGui::ColorEdit3("Dome Color: G", &domeColor.g);
+        ImGui::ColorEdit3("Dome Color: B", &domeColor.b);
+        ImGui::End();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		//actual output draw
 		glfwSwapBuffers(window);
 

@@ -101,12 +101,6 @@ namespace arout {
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
-        //for(auto v:vertices){
-        //    v.position.x += camPos.x;
-        //    v.position.y += camPos.y;
-        //    v.position.z += camPos.z;
-        //}
-
         //index draw
         glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, nullptr);
         //vertex draw
