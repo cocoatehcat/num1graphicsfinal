@@ -24,9 +24,6 @@ public:
 	//use function
 	void Render();
 
-	//wireframe
-	void SetVisibility(bool wireTrue);
-
 	//setters
 	void setRows(int numRows);
 	void setCols(int numCols);
@@ -39,6 +36,8 @@ private:
     unsigned int skyVAO;
     unsigned int skyVBO;
     unsigned int skyEBO;
+    int numVertices;
     std::vector<Vertex> vertices;
+    int numIndices;
     std::vector<int> indices;
 };

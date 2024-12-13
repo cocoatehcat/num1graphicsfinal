@@ -131,7 +131,7 @@ int main() {
 
 		glDisable(GL_CULL_FACE);
 		glPolygonMode(GL_FRONT, GL_FILL);
-		theDamnSky.Render();
+		theDamnSky.Skydome::Render();
 
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); //Unlocks
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Locks

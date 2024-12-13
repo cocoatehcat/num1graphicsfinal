@@ -6,6 +6,31 @@ Skydome::Skydome(int numRows, int numCols, float rad, glm::vec3 camPos) {
 	columns = numCols;
 	radius = rad;
 
+    float subdivisions = columns - 1; //for test purposes - plane
+
+    glm::vec3 v = glm::vec3(0);//vertex
+    Vertex vv = Vertex();
+    for (int r = 0; r <= subdivisions; r++) {
+        for (int c = 0; c <= subdivisions; c++) {
+            v.x = rows * (c/subdivisions);
+            v.y = -float(columns) * (r / subdivisions);
+            vv.position = v;
+            vv.color = glm::vec4(1.0);
+            vv.normal = glm::vec3(1.0);
+            vertices.push_back(vv);
+        }
+    }
+
+    glm::vec3 i = glm::vec3(0);//index
+    for (int r = 0; r <= subdivisions; r++) {
+        for (int c = 0; c <= subdivisions; c++) {
+            int start = r * columns * c;
+            indices.push_back(start);
+            indices.push_back(start + 1);
+            indices.push_back(start + columns + 1);
+        }
+    }
+
     glGenVertexArrays(1, &skyVAO);
     glBindVertexArray(skyVAO);
 
@@ -36,8 +61,8 @@ Skydome::Skydome(int numRows, int numCols, float rad, glm::vec3 camPos) {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
     }
 
-    //numvertices = vertices.size
-    //numindices = indices.size
+    numVertices = vertices.size();
+    numIndices = indices.size();
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -70,10 +95,16 @@ void Skydome::Render() {
 		}
 	}
 
-    int numIndices = indices.size();
+    numVertices = vertices.size();
+    numIndices = indices.size();
 
     glBindVertexArray(skyVAO);
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
+
     glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, nullptr);
+    //glDrawArrays(GL_POINTS, 0 , numVertices);
 
 
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
@@ -85,3 +116,7 @@ void Skydome::Render() {
 	//glBindVertexArray(vao);
 	//glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, &indices);
 }
+
+void Skydome::setRows(int numRows) {rows = numRows;}
+void Skydome::setCols(int numCols) {columns = numCols;}
+void Skydome::setRadius(float rad) {radius = rad;}
