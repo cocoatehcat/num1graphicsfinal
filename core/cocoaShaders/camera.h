@@ -20,7 +20,7 @@ namespace cam {
 		glm::vec3 getFront() { return cameraFront; }
 		glm::vec3 getUp() { return cameraUp; }
 		float getFOV() { return fov; }
-		glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+		glm::vec3 cameraPos = glm::vec3(0.0f, 10.0f, 3.0f);
 
 	private:
 
