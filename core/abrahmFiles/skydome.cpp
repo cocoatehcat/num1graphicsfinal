@@ -25,7 +25,7 @@ namespace arout {
                 v.y = rad * cos(phi);
                 v.z = rad * sin(theta) * sin(phi);
                 vert.position = v;
-                vert.color = glm::vec4(1.0);
+                vert.color = glm::vec4(1.0, 0.5, 0.25, 1.0);
                 vert.normal = glm::normalize(v);
                 vertices.push_back(vert);
             }
